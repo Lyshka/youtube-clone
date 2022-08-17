@@ -1,0 +1,4 @@
+[[redirects]]
+  from = "/"
+  to = "https://youtube-clone-lyshka-back.herokuapp.com/api/"
+  status = 200
