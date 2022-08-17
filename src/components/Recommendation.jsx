@@ -14,7 +14,7 @@ const Recommendation = ({tags}) => {
 
 	useEffect(() => {
 		const fetchVideos = async () => {
-			const {data} = await axios.get(`/videos/tags?tags=${tags}`)
+			const {data} = await axios.get(`https://youtube-clone-lyshka-back.herokuapp.com/api/videos/tags?tags=${tags}`)
 
 			setVideos(data)
 		}

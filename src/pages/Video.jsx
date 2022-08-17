@@ -131,8 +131,8 @@ const Video = () => {
 		const fetchData = async () => {
 			dispatch(fetchStart())
 			try {
-				const videosRes = await axios.get(`/videos/find/${path}`)
-				const channelRes = await axios.get(`/users/find/${videosRes.data.userId}`)
+				const videosRes = await axios.get(`https://youtube-clone-lyshka-back.herokuapp.com/api/videos/find/${path}`)
+				const channelRes = await axios.get(`https://youtube-clone-lyshka-back.herokuapp.com/api/users/find/${videosRes.data.userId}`)
 
 				setChannel(channelRes.data)
 				dispatch(fetchSuccess(videosRes.data))
@@ -149,19 +149,19 @@ const Video = () => {
 	// like, dislike
 
 	const handleLike = async () => {
-		await axios.put(`/users/like/${currentVideo._id}`)
+		await axios.put(`https://youtube-clone-lyshka-back.herokuapp.com/api/users/like/${currentVideo._id}`)
 		dispatch(like(currentUser._id))
 	}
 
 	const handleDislike = async () => {
-		await axios.put(`/users/dislike/${currentVideo._id}`)
+		await axios.put(`https://youtube-clone-lyshka-back.herokuapp.com/api/users/dislike/${currentVideo._id}`)
 		dispatch(dislike(currentUser._id))
 	}
 
 	const handleSub = async () => {
 		currentUser.subscribedUsers.includes(channel._id)
-			? await axios.put(`/users/unsub/${channel._id}`)
-			: await axios.put(`/users/sub/${channel._id}`)
+			? await axios.put(`https://youtube-clone-lyshka-back.herokuapp.com/api/users/unsub/${channel._id}`)
+			: await axios.put(`https://youtube-clone-lyshka-back.herokuapp.com/api/users/sub/${channel._id}`)
 		dispatch(subscription(channel._id))
 	}
 
@@ -169,27 +169,27 @@ const Video = () => {
 		<Container>
 			<Content>
 				<VideoWrapper>
-					<VideoFrame src={currentVideo.videoUrl} controls/>
+					<VideoFrame src={currentVideo?.videoUrl} controls/>
 				</VideoWrapper>
-				<Title>{currentVideo.title}</Title>
+				<Title>{currentVideo?.title}</Title>
 				<Details>
-					<Info>{currentVideo.views} views • {format(currentVideo.createdAt)}</Info>
+					<Info>{currentVideo?.views} views • {format(currentVideo?.createdAt)}</Info>
 					<Buttons>
 						<Button onClick={handleLike}>
-							{currentVideo.likes?.includes(currentUser._id) ? (
+							{currentVideo?.likes?.includes(currentUser?._id) ? (
 								<ThumbUpIcon />
 							) : (
 								<ThumbUpOutlinedIcon />
 							)}{" "}
-							{currentVideo.likes?.length}
+							{currentVideo?.likes?.length}
 						</Button>
 						<Button onClick={handleDislike}>
-							{currentVideo.dislikes?.includes(currentUser._id) ? (
+							{currentVideo?.dislikes?.includes(currentUser?._id) ? (
 								<ThumbDownIcon />
 							) : (
 								<ThumbDownOffAltOutlinedIcon />
 							)}{" "}
-							{currentVideo.dislikes?.length}
+							{currentVideo?.dislikes?.length}
 						</Button>
 						<Button>
 							<ReplyOutlinedIcon /> Share
@@ -207,18 +207,18 @@ const Video = () => {
 							<ChannelName>{channel.name}</ChannelName>
 							<ChannelCounter>{channel.subscribers} subscribers</ChannelCounter>
 							<Description>
-								{currentVideo.desc}
+								{currentVideo?.desc}
 							</Description>
 						</ChannelDetail>
 					</ChannelInfo>
 					<Subscribe onClick={handleSub}>
-						{currentUser.subscribedUsers?.includes(channel._id) ? "SUBSCRIBED" : "SUBSCRIBE"}
+						{currentUser.subscribedUsers?.includes(channel?._id) ? "SUBSCRIBED" : "SUBSCRIBE"}
 					</Subscribe>
 				</Channel>
 				<Hr />
-				<Comments videoId={currentVideo._id} />
+				<Comments videoId={currentVideo?._id} />
 			</Content>
-			<Recommendation tags={currentVideo.tags}/>
+			<Recommendation tags={currentVideo?.tags}/>
 		</Container>
 	);
 };

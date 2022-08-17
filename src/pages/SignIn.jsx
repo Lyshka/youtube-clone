@@ -79,7 +79,7 @@ const SignIn = () => {
 		dispatch(loginStart())
 
 		try {
-			const {data} = await axios.post("/auth/signin", {name, password})
+			const {data} = await axios.post("https://youtube-clone-lyshka-back.herokuapp.com/api/auth/signin", {name, password})
 			dispatch(loginSuccess(data))
 
 		} catch (err) {
@@ -92,7 +92,7 @@ const SignIn = () => {
 
 		signInWithPopup(auth, provider)
 			.then(result => {
-				axios.post("/auth/google", {
+				axios.post("https://youtube-clone-lyshka-back.herokuapp.com/api/auth/google", {
 					name: result.user.displayName,
 					email: result.user.email,
 					img: result.user.photoURL

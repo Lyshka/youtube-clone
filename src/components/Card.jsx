@@ -62,7 +62,7 @@ const Card = ({type, video}) => {
 
 	useEffect(() => {
 		const fetchChannel = async () => {
-			const {data} = await axios.get(`/users/find/${video.userId}`)
+			const {data} = await axios.get(`https://youtube-clone-lyshka-back.herokuapp.com/api/users/find/${video.userId}`)
 
 			setChannel(data)
 		}

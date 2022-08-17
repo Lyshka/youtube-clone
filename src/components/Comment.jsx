@@ -44,7 +44,7 @@ const Comment = ({comment}) => {
 
 	useEffect(() => {
 		const fetchComment = async () => {
-			const {data} = await axios.get(`/users/find/${comment.userId}`)
+			const {data} = await axios.get(`https://youtube-clone-lyshka-back.herokuapp.com/api/users/find/${comment.userId}`)
 
 			setChannel(data)
 		}

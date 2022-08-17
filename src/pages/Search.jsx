@@ -18,7 +18,7 @@ const Search = () => {
 
 	useEffect(() => {
 		const fetchVideos = async () => {
-			const {data} = await axios.get(`/videos/search${query}`)
+			const {data} = await axios.get(`https://youtube-clone-lyshka-back.herokuapp.com/api/videos/search${query}`)
 
 			setVideos(data)
 		}
